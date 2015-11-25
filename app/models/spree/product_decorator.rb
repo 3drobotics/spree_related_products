@@ -60,8 +60,6 @@ Spree::Product.class_eval do
     Spree::Relation.where(related_to_type: self.class.to_s).where(related_to_id: id).destroy_all
   end
 
-  private
-
   def find_relation_type(relation_name)
     self.class.relation_types.detect { |rt| rt.name.downcase.gsub(' ', '_').pluralize == relation_name.to_s.downcase }
   rescue ActiveRecord::StatementInvalid
@@ -70,6 +68,8 @@ Spree::Product.class_eval do
     # from another extension when both are used in a project.
     nil
   end
+
+  private
 
   # Returns all the Products that are related to this record for the given RelationType.
   #
